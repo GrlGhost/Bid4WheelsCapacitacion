@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(UUID uuid) {
         if (productRepository.existsById(uuid)) {
             productRepository.deleteById(uuid);
-        };
+        }
     }
 
     @Override
