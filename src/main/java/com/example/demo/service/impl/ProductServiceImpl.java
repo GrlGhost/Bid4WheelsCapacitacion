@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
@@ -56,6 +57,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<Product> getProductByID(UUID uuid) {
-        return productRepository.findById(uuid);
+        Optional<Product> product = productRepository.findById(uuid);
+        if(product.isPresent()){
+            return product;
+        }else {
+            throw new EntityNotFoundException("Product with id: " + uuid + " not found");
+        }
     }
 }
