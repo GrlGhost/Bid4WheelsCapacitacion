@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.CreateProductDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.exception.EntityNotFoundException;
 import com.example.demo.model.Product;
@@ -28,21 +29,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product createProduct(ProductDTO productDTO) {
+    public ProductDTO createProduct(CreateProductDTO createProductDTO) {
         Product product = Product.builder()
-                .name(productDTO.getName())
-                .price(productDTO.getPrice())
+                .name(createProductDTO.getName())
+                .price(createProductDTO.getPrice())
                 .build();
-        return productRepository.save(product);
+        return productRepository.save(product).toDTO();
     }
 
     @Override
-    public Optional<Product> updateProduct(ProductDTO productDTO, UUID uuid) {
+    public Optional<Product> updateProduct(CreateProductDTO createProductDTO, UUID uuid) {
         Optional<Product> productToModify = productRepository.findById(uuid);
         if(productToModify.isPresent()){
             Product product = productToModify.get();
-            product.setName(productDTO.getName());
-            product.setPrice(productDTO.getPrice());
+            product.setName(createProductDTO.getName());
+            product.setPrice(createProductDTO.getPrice());
             return Optional.of(productRepository.save(product));
         }
         return Optional.empty();

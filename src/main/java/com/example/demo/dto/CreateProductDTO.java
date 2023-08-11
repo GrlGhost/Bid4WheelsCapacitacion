@@ -1,8 +1,7 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -10,9 +9,9 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class CreateProductDTO {
 
-    private UUID uuid;
+    @NotBlank(message = "Name is mandatory")
     private String name;
     private double price;
 }

@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.dto.CreateProductDTO;
 import com.example.demo.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,10 +23,11 @@ public class Product {
     private String name;
     private double price;
 
-    static ProductDTO toDTO(Product product) {
+    public ProductDTO toDTO() {
         return ProductDTO.builder()
-                .name(product.getName())
-                .price(product.getPrice())
+                .uuid(this.getUuid())
+                .name(this.getName())
+                .price(this.getPrice())
                 .build();
     }
 
