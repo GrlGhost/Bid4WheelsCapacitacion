@@ -15,11 +15,11 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/private/{chat_id}")
-    public void sendPositions(@PathVariable("chat_id") Long chat_id, @Payload InputMessage message){
+    @MessageMapping("/private")
+    public void sendPositions(@Payload InputMessage message){
         System.out.println("entro por aca");
 
-        simpMessagingTemplate.convertAndSend("/topic/messages/"+chat_id,
+        simpMessagingTemplate.convertAndSend("/topic/messages/"+message.getChat_id(),
                 new OutputMessage(message.getFrom(), message.getText()) );
     }
 
