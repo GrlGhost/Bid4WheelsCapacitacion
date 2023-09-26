@@ -1,5 +1,12 @@
 package com.example.demo.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class InputMessage {
 
     private String from;
